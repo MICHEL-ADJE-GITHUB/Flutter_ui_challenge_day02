@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 class FadeAnimation extends StatelessWidget {
-  final int delay;
+  final double delay;
   final Widget child;
 
   FadeAnimation(this.delay, this.child);
@@ -10,10 +10,16 @@ class FadeAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlayAnimationBuilder<double>(
-        tween: Tween(begin: 50.0, end: 200.0), // set tween
-        duration: Duration(seconds: delay), // set duration
-        builder: (context, value, _) {
-          return child;
-        });
+      tween: Tween(begin: 70.0, end: 1.0),
+      duration: Duration(milliseconds: (500 * delay).round()),
+      curve: Curves.easeOut,
+      builder: (context, value, child) {
+        return Transform.translate(
+          offset: Offset(0, value),
+          child: child,
+        );
+      },
+      child: child,
+    );
   }
 }

@@ -1,12 +1,33 @@
+import 'package:day_2_app/FadeAnimation.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({super.key});
 
-  final pageController = PageController(
-    initialPage: 0,
-  );
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late PageController pageController;
+
   int totalPages = 4;
+
+  void _onScroll() {}
+
+  @override
+  void initState() {
+    pageController = PageController(
+      initialPage: 0,
+    )..addListener(_onScroll);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,12 +105,15 @@ class HomePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text(
-                          currentPageNumber.toString(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 21,
+                        FadeAnimation(
+                          2,
+                          Text(
+                            currentPageNumber.toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 21,
+                            ),
                           ),
                         ),
                         Text(
@@ -105,81 +129,91 @@ class HomePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 10.0),
-                        child: Text(
-                          title,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 38,
-                          ),
-                        ),
-                      ),
-                      const Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                            size: 15,
-                          ),
-                          Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                            size: 15,
-                          ),
-                          Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                            size: 15,
-                          ),
-                          Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                            size: 15,
-                          ),
-                          Icon(
-                            Icons.star,
-                            color: Colors.grey,
-                            size: 15,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            '4.0',
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 11.5,
+                          padding: const EdgeInsets.only(bottom: 10.0),
+                          child: FadeAnimation(
+                            1,
+                            Text(
+                              title,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 38,
+                              ),
                             ),
-                          ),
-                          Text(
-                            '|200',
-                            style: TextStyle(
-                              color: Colors.white60,
-                              fontSize: 11,
-                            ),
-                          ),
-                        ],
-                      ),
+                          )),
+                      FadeAnimation(
+                          1.5,
+                          const Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                                size: 15,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                                size: 15,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                                size: 15,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                                size: 15,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.grey,
+                                size: 15,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                '4.0',
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 11.5,
+                                ),
+                              ),
+                              Text(
+                                '|200',
+                                style: TextStyle(
+                                  color: Colors.white60,
+                                  fontSize: 11,
+                                ),
+                              ),
+                            ],
+                          )),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 20, 50.0, 10),
-                        child: Text(
-                          description,
-                          style: const TextStyle(
-                            height: 2,
-                            color: Colors.white70,
-                            fontSize: 13,
+                        child: FadeAnimation(
+                          2,
+                          Text(
+                            description,
+                            style: const TextStyle(
+                              height: 2,
+                              color: Colors.white70,
+                              fontSize: 13,
+                            ),
                           ),
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(bottom: 30.0),
-                        child: Text(
-                          'READ MORE',
-                          style: TextStyle(
-                              color: Colors.white70,
-                              fontWeight: FontWeight.bold),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 30.0),
+                        child: FadeAnimation(
+                          2.5,
+                          const Text(
+                            'READ MORE',
+                            style: TextStyle(
+                                color: Colors.white70,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                     ],
